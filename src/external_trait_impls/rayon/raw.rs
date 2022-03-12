@@ -87,7 +87,7 @@ impl<T, A: Allocator + Clone> RawIntoParIter<T, A> {
     }
 }
 
-impl<T: Send, A: Allocator + Clone + Send> ParallelIterator for RawIntoParIter<T, A> {
+impl<T: Send, A: Allocator + Clone> ParallelIterator for RawIntoParIter<T, A> {
     type Item = T;
 
     #[cfg_attr(feature = "inline-more", inline)]
@@ -116,7 +116,7 @@ pub struct RawParDrain<'a, T, A: Allocator + Clone = Global> {
     marker: PhantomData<&'a RawTable<T, A>>,
 }
 
-unsafe impl<T: Send, A: Allocator + Clone> Send for RawParDrain<'_, T, A> {}
+unsafe impl<T, A: Allocator + Clone> Send for RawParDrain<'_, T, A> {}
 
 impl<T, A: Allocator + Clone> RawParDrain<'_, T, A> {
     #[cfg_attr(feature = "inline-more", inline)]
@@ -134,7 +134,7 @@ impl<T: Send, A: Allocator + Clone> ParallelIterator for RawParDrain<'_, T, A> {
         C: UnindexedConsumer<Self::Item>,
     {
         let _guard = guard(self.table, |table| unsafe {
-            table.as_mut().clear_no_drop();
+            table.as_mut().clear_no_drop()
         });
         let iter = unsafe { self.table.as_ref().iter().iter };
         mem::forget(self);
@@ -146,9 +146,7 @@ impl<T: Send, A: Allocator + Clone> ParallelIterator for RawParDrain<'_, T, A> {
 impl<T, A: Allocator + Clone> Drop for RawParDrain<'_, T, A> {
     fn drop(&mut self) {
         // If drive_unindexed is not called then simply clear the table.
-        unsafe {
-            self.table.as_mut().clear();
-        }
+        unsafe { self.table.as_mut().clear() }
     }
 }
 
@@ -177,7 +175,7 @@ impl<T: Send> UnindexedProducer for ParDrainProducer<T> {
     {
         // Make sure to modify the iterator in-place so that any remaining
         // elements are processed in our Drop impl.
-        for item in &mut self.iter {
+        while let Some(item) = self.iter.next() {
             folder = folder.consume(unsafe { item.read() });
             if folder.full() {
                 return folder;
@@ -195,7 +193,7 @@ impl<T> Drop for ParDrainProducer<T> {
     fn drop(&mut self) {
         // Drop all remaining elements
         if mem::needs_drop::<T>() {
-            for item in &mut self.iter {
+            while let Some(item) = self.iter.next() {
                 unsafe {
                     item.drop();
                 }
