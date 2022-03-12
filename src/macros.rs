@@ -57,8 +57,8 @@ macro_rules! cfg_if {
 // default fn syntax for specialization changes in the future.
 #[cfg(feature = "nightly")]
 macro_rules! default_fn {
-	(#[$($a:tt)*] $($tt:tt)*) => {
-        #[$($a)*] default $($tt)*
+	($($tt:tt)*) => {
+        default $($tt)*
     }
 }
 #[cfg(not(feature = "nightly"))]
