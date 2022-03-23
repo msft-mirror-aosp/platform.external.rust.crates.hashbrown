@@ -5,15 +5,7 @@
       "name": "keystore2_test"
     },
     {
-      "name": "legacykeystore_test"
-    }
-  ],
-  "presubmit-rust": [
-    {
-      "name": "keystore2_test"
-    },
-    {
-      "name": "legacykeystore_test"
+      "name": "vpnprofilestore_test"
     }
   ]
 }
