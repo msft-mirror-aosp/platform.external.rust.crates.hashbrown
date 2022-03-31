@@ -9,14 +9,12 @@ use core::{mem, ptr};
     target_pointer_width = "64",
     target_arch = "aarch64",
     target_arch = "x86_64",
-    target_arch = "wasm32",
 ))]
 type GroupWord = u64;
 #[cfg(all(
     target_pointer_width = "32",
     not(target_arch = "aarch64"),
     not(target_arch = "x86_64"),
-    not(target_arch = "wasm32"),
 ))]
 type GroupWord = u32;
 
@@ -39,7 +37,7 @@ fn repeat(byte: u8) -> GroupWord {
 #[derive(Copy, Clone)]
 pub struct Group(GroupWord);
 
-// We perform all operations in the native endianness, and convert to
+// We perform all operations in the native endianess, and convert to
 // little-endian just before creating a BitMask. The can potentially
 // enable the compiler to eliminate unnecessary byte swaps if we are
 // only checking whether a BitMask is empty.
@@ -52,7 +50,6 @@ impl Group {
     /// value for an empty hash table.
     ///
     /// This is guaranteed to be aligned to the group size.
-    #[inline]
     pub const fn static_empty() -> &'static [u8; Group::WIDTH] {
         #[repr(C)]
         struct AlignedBytes {
@@ -106,7 +103,7 @@ impl Group {
     #[inline]
     pub fn match_byte(self, byte: u8) -> BitMask {
         // This algorithm is derived from
-        // https://graphics.stanford.edu/~seander/bithacks.html##ValueInWord
+        // http://graphics.stanford.edu/~seander/bithacks.html##ValueInWord
         let cmp = self.0 ^ repeat(byte);
         BitMask((cmp.wrapping_sub(repeat(0x01)) & !cmp & repeat(0x80)).to_le())
     }
