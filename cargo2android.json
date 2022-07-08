@@ -1,4 +1,6 @@
 {
   "device": true,
-  "run": true
+  "patch": "patches/Android.bp.patch",
+  "run": true,
+  "tests": true
 }
