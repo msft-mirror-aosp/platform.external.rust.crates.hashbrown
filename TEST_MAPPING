@@ -19,15 +19,6 @@
       "name": "avmdtool_tests"
     },
     {
-      "name": "hashbrown_test_src_lib"
-    },
-    {
-      "name": "hashbrown_test_tests_hasher"
-    },
-    {
-      "name": "hashbrown_test_tests_set"
-    },
-    {
       "name": "keystore2_legacy_blobs_test"
     },
     {
@@ -49,15 +40,6 @@
     },
     {
       "name": "avmdtool_tests"
-    },
-    {
-      "name": "hashbrown_test_src_lib"
-    },
-    {
-      "name": "hashbrown_test_tests_hasher"
-    },
-    {
-      "name": "hashbrown_test_tests_set"
     },
     {
       "name": "keystore2_legacy_blobs_test"
