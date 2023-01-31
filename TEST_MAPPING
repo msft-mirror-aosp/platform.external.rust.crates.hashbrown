@@ -3,22 +3,16 @@
   "imports": [
     {
       "path": "external/rust/crates/hashlink"
+    },
+    {
+      "path": "system/security/keystore2"
+    },
+    {
+      "path": "system/security/keystore2/legacykeystore"
     }
   ],
   "presubmit": [
     {
-      "name": "ZipFuseTest"
-    },
-    {
-      "name": "apkdmverity.test"
-    },
-    {
-      "name": "authfs_device_test_src_lib"
-    },
-    {
-      "name": "avmdtool_tests"
-    },
-    {
       "name": "hashbrown_test_src_lib"
     },
     {
@@ -26,31 +20,10 @@
     },
     {
       "name": "hashbrown_test_tests_set"
-    },
-    {
-      "name": "keystore2_legacy_blobs_test"
-    },
-    {
-      "name": "keystore2_test"
-    },
-    {
-      "name": "legacykeystore_test"
     }
   ],
   "presubmit-rust": [
     {
-      "name": "ZipFuseTest"
-    },
-    {
-      "name": "apkdmverity.test"
-    },
-    {
-      "name": "authfs_device_test_src_lib"
-    },
-    {
-      "name": "avmdtool_tests"
-    },
-    {
       "name": "hashbrown_test_src_lib"
     },
     {
@@ -58,15 +31,6 @@
     },
     {
       "name": "hashbrown_test_tests_set"
-    },
-    {
-      "name": "keystore2_legacy_blobs_test"
-    },
-    {
-      "name": "keystore2_test"
-    },
-    {
-      "name": "legacykeystore_test"
     }
   ]
 }
