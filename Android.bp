@@ -45,7 +45,7 @@ rust_test {
     crate_name: "hashbrown",
     cargo_env_compat: true,
     cargo_pkg_version: "0.12.3",
-    srcs: ["src/lib.rs"],
+    crate_root: "src/lib.rs",
     test_suites: ["general-tests"],
     auto_gen_config: true,
     test_options: {
@@ -74,7 +74,7 @@ rust_test {
     crate_name: "hasher",
     cargo_env_compat: true,
     cargo_pkg_version: "0.12.3",
-    srcs: ["tests/hasher.rs"],
+    crate_root: "tests/hasher.rs",
     test_suites: ["general-tests"],
     auto_gen_config: true,
     test_options: {
@@ -104,7 +104,7 @@ rust_test {
     crate_name: "set",
     cargo_env_compat: true,
     cargo_pkg_version: "0.12.3",
-    srcs: ["tests/set.rs"],
+    crate_root: "tests/set.rs",
     test_suites: ["general-tests"],
     auto_gen_config: true,
     test_options: {
@@ -134,7 +134,7 @@ rust_library {
     crate_name: "hashbrown",
     cargo_env_compat: true,
     cargo_pkg_version: "0.12.3",
-    srcs: ["src/lib.rs"],
+    crate_root: "src/lib.rs",
     edition: "2021",
     features: [
         "ahash",
